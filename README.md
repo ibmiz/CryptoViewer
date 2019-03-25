@@ -37,6 +37,7 @@ Or to generate static project:
 > npm run generate
 
 The web application should be running on http://localhost:3000/ for dev build
+http://localhost:3000/sitemap.xml for generated sitemap 
 
 ## Explanation of functions
 
@@ -110,3 +111,7 @@ No parameters
 This will return the next chosen value for the next currency
 #### Returns
 Will either return the `randomId` value or 1 incase `randomId` is null
+
+
+## License 
+This project is licensed under the terms of the MIT license
