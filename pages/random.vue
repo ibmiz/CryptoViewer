@@ -10,43 +10,33 @@
       class="text-center"
       bg-variant="dark"
       text-variant="white"
-      :title="randomcurrencies[selected].name"
+      :title="currenciesList[selected].name"
     >
-      <b-card-text>Price is: ${{randomcurrencies[selected].price_usd}}</b-card-text>
+      <b-card-text>Rank is: {{currenciesList[selected].rank}}</b-card-text>
+      <b-card-text>Price is: ${{Number (parseFloat(currenciesList[selected].price_usd).toPrecision(3))}}</b-card-text>
       <b-button @click="pickRandom" variant="primary">Random</b-button>
     </b-card>
   </div>
 </template>
 
 <script lang="ts">
-import {Component, Vue} from "nuxt-property-decorator"
-import axios from "axios";
-import router from 'vue-router'
+import { Component, Vue } from "nuxt-property-decorator";
+import router from "vue-router";
 
-
-export default Vue.extend( {
-
-data () {
+export default Vue.extend({
+  data() {
     return {
-      randomId: null
-    }
-  },
-  asyncData() {
-    return axios
-      .get("https://api.coinmarketcap.com/v1/ticker/?limit=50")
-      .then(response => {
-        return {
-          randomcurrencies: response.data
-        };
-      });
+      randomId: 1,
+      currenciesList: this.$route.params.currencies_List
+    };
   },
   methods: {
     pickRandom() {
-      this.randomId = Math.floor(Math.random() * this.randomcurrencies.length);
+      this.randomId = Math.floor(Math.random() * this.currenciesList.length);
     }
   },
   computed: {
-    selected():any {
+    selected(): any {
       return this.randomId || 1;
     }
   }

@@ -3,15 +3,15 @@
     <b-navbar type="dark" variant="dark" fixed="top" static>
       <b-nav>
         <b-nav-item active router-link to="/">Home</b-nav-item>
-        <b-nav-item active router-link to="/random">Random</b-nav-item>
+        <b-nav-item @click="goTorandom(currencies)">Random</b-nav-item>
       </b-nav>
 
  
     <div class="col-xs-3">
        <b-form-select class="selectpicker" size="sm" ref="Range" v-model="Range">
           <option value=0>Select category</option>
-          <option value=1>0-10</option>
-          <option value=2>10-20</option>
+          <option value=1>Top 1-10 Coins</option>
+          <option value=2>Top 11-20 Coins</option>
         </b-form-select>
 
       </div>
@@ -32,9 +32,10 @@
         class="col-md-6"
       >
         <b-card bg-variant="dark" :header="currency.name" text-variant="white" class="text-center">
+          <b-card-text>Rank: {{currency.rank}}</b-card-text>
           <div id="app">
             <b-button
-              @click="goTodetail(currency.name, currency.price_usd, currency.percent_change_1h, currencies.slice(index+1,index+4))"
+              @click="goTodetail(currency.name, currency.price_usd, currency.percent_change_1h, currency.total_supply, currencies.slice(index+1,index+4))"
             >Details</b-button>
           </div>
         </b-card>
@@ -52,7 +53,7 @@ export default Vue.extend({
   data() {
     return {
       currentOrder: "rank",
-      Range: 0,
+      Range: 1,
       currencies: []
     };
   },
@@ -63,7 +64,6 @@ export default Vue.extend({
     }).then(
       result => {
         this.currencies = result.data;
-        console.log(result.data);
       },
       error => {
         console.error(error);
@@ -91,22 +91,31 @@ export default Vue.extend({
         return currencies.slice(0,10);
       }
       if (this.Range == 2){
-        return currencies.slice(11,20)
+        return currencies.slice(10,20)
       }
     },
-    goTodetail(Id: any, price: any, percentChange: any, nextCurrency: any) {
+    goTodetail(Id: any, price: any, percentChange: any, totalSupply: any, nextCurrency: any) {
       this.$router.push({
         name: "details",
         params: {
           crypto_name: Id,
           price_usd: price,
           percent_change_1h: percentChange,
+          total_supply: totalSupply,
           next_currency: nextCurrency
         }
       });
+    },
+    goTorandom(currenciesList: any){
+      this.$router.push({
+        name: "random",
+        params: {
+          currencies_List: currenciesList
+        }
+      })
     }
   },
-  props: ["name", "price_usd", "percent_change_1h", "next_currency"]
+  props: ["name", "price_usd", "percent_change_1h", "next_currency", "total_supply", "currencies_List"]
 });
 </script>
 

@@ -7,7 +7,7 @@
     </b-navbar>
 
     <div class="details">
-      <b-card 
+      <b-card
         bg-variant="dark"
         text-variant="white"
         header="Primary"
@@ -16,30 +16,22 @@
         align="center"
         :title="Id"
       >
-        <b-card-text>Current price is: ${{price_usd}}</b-card-text>
-        <b-card-text>Percentage change is: {{percent_change_1h}}%</b-card-text>
+        <b-card-text>Current price is: $ {{price_usd}}</b-card-text>
+        <b-card-text>Percentage change in 1 hour is: {{percent_change_1h}}%</b-card-text>
+        <b-card-text>Total Supply is: {{total_supply}}</b-card-text>
       </b-card>
 
-      <h2 class="text-white bg-dark, text-center"> Next 3 coins</h2>
+      <h2 class="text-white bg-dark, text-center">Next 3 coins</h2>
 
-      <div
-        id="cards"
-        v-for="currency in nextCurrency"
-        :key="currency.name"
-        class="col-md-6"
-      >
+      <div id="cards" v-for="currency in nextCurrency" :key="currency.name" class="col-md-6">
         <b-card bg-variant="dark" :header="currency.name" text-variant="white" class="text-center">
-          <b-card-text>Current price is: ${{currency.price_usd}}</b-card-text>
-          <b-card-text>Percentage change is: {{currency.percent_change_1h}}%</b-card-text>
-          </b-card>
+          <b-card-text>Current price is: $ {{Number (parseFloat(currency.price_usd).toPrecision(3))}}</b-card-text>
+          <b-card-text>Percentage change in 1 hour is: {{currency.percent_change_1h}}%</b-card-text>
+          <b-card-text>Total Supply is: {{currency.total_supply}}</b-card-text>
+        </b-card>
       </div>
     </div>
-
-
-
   </div>
-
-
 </template>
 
 <script lang="ts">
@@ -50,8 +42,9 @@ export default Vue.extend({
   data() {
     return {
       Id: this.$route.params.crypto_name,
-      price_usd: this.$route.params.price_usd,
+      price_usd: Number (parseFloat(this.$route.params.price_usd).toPrecision(3)),
       percent_change_1h: this.$route.params.percent_change_1h,
+      total_supply: this.$route.params.total_supply,
       nextCurrency: this.$route.params.next_currency,
       title: "Details"
     };
