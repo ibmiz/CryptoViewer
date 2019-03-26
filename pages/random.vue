@@ -1,6 +1,6 @@
 <template>
   <div>
-    <!-- NavBar is links back to Home -->
+    <!-- NavBar links back to Home -->
     <b-navbar type="dark" variant="dark" fixed="top">
       <b-nav>
         <b-nav-item active router-link to="/">Home</b-nav-item>

@@ -7,7 +7,7 @@
       </b-nav>
     </b-navbar>
 
-<!-- The top section will show cryptocurrencies details -->
+    <!-- The top section will show cryptocurrencies details -->
     <div class="details">
       <b-card
         bg-variant="dark"
@@ -25,7 +25,7 @@
 
       <h2 class="text-white bg-dark, text-center">Next 3 coins</h2>
 
-<!-- Display the next 3 cryptocurrencies in its own card -->
+      <!-- Display the next 3 cryptocurrencies in its own card -->
       <div id="cards" v-for="currency in nextCurrency" :key="currency.name" class="col-md-6">
         <b-card bg-variant="dark" :header="currency.name" text-variant="white" class="text-center">
 

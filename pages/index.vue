@@ -143,7 +143,7 @@ export default Vue.extend({
       })
     }
   },
-  props: ["name", "price_usd", "percent_change_1h", "next_currency", "total_supply", "currencies_List"]
+  props: ["crypto_name", "price_usd", "percent_change_1h", "next_currency", "total_supply", "currencies_List"]
 });
 </script>
 
