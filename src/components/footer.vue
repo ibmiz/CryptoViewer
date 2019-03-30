@@ -1,0 +1,7 @@
+<template>
+  <div class="footer">
+   <footer>
+       <h1>footer</h1>
+   </footer>
+  </div>
+</template>

@@ -16,11 +16,15 @@
         header-bg-variant="primary"
         header-text-variant="white"
         align="center"
-        :title="Id"
+        :title="currencies[rank-1].name"
       >
-        <b-card-text>Current price is: $ {{price_usd}}</b-card-text>
-        <b-card-text>Percentage change in 1 hour is: {{percent_change_1h}}%</b-card-text>
-        <b-card-text>Total Supply is: {{total_supply}}</b-card-text>
+        <b-card-text>
+          Current price is: $ {{Number(
+          parseFloat(currencies[rank-1].price_usd).toPrecision(3)
+          )}}
+        </b-card-text>
+        <b-card-text>Percentage change in 1 hour is: {{currencies[rank-1].percent_change_1h}}%</b-card-text>
+        <b-card-text>Total Supply is: {{currencies[rank-1].total_supply}}</b-card-text>
       </b-card>
 
       <h2 class="text-white bg-dark, text-center">Next 3 coins</h2>
@@ -28,7 +32,6 @@
       <!-- Display the next 3 cryptocurrencies in its own card -->
       <div id="cards" v-for="currency in nextCurrency" :key="currency.name" class="col-md-6">
         <b-card bg-variant="dark" :header="currency.name" text-variant="white" class="text-center">
-
           <!-- The price is rounded to 3 significant figures for easier reading -->
           <b-card-text>Current price is: $ {{Number (parseFloat(currency.price_usd).toPrecision(3))}}</b-card-text>
           <b-card-text>Percentage change in 1 hour is: {{currency.percent_change_1h}}%</b-card-text>
@@ -36,22 +39,25 @@
         </b-card>
       </div>
     </div>
+    <Footer></Footer>
   </div>
 </template>
 
 <script lang="ts">
-import { Component, Vue } from "nuxt-property-decorator";
+import Vue from "vue";
+import Footer from "@/components/footer.vue";
 
 export default Vue.extend({
   name: "details",
+  components: {
+    Footer
+  },
   data() {
     return {
-      // Assign each data item to the values pushed through by the router 
-      Id: this.$route.params.crypto_name,
-      price_usd: Number (parseFloat(this.$route.params.price_usd).toPrecision(3)),
-      percent_change_1h: this.$route.params.percent_change_1h,
-      total_supply: this.$route.params.total_supply,
-      nextCurrency: this.$route.params.next_currency,
+      // Assign each data item to the values pushed through by the router
+      rank: this.$route.params.currencyRank,
+      currencies: this.$store.state.currencies,
+      nextCurrency: this.$store.state.currencies.slice(parseInt(this.$route.params.currencyRank),parseInt(this.$route.params.currencyRank)+3),
       title: "Details"
     };
   }

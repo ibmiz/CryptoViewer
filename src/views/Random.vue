@@ -20,20 +20,26 @@
       <!-- When the random button is clicked, the function pickRandom() is called -->
       <b-button @click="pickRandom" variant="primary">Random</b-button>
     </b-card>
+  
+  <Footer></Footer>
   </div>
 </template>
 
 <script lang="ts">
-import { Component, Vue } from "nuxt-property-decorator";
+import Vue from 'vue';
 import router from "vue-router";
+import Footer from '@/components/footer.vue';
 
 export default Vue.extend({
+  components: {
+    Footer
+  },
   data() {
     return {
       // Assign currenciesList to data pushed through from router
       // randomId starts off with 1 initially to prevent an index error
       randomId: 1,
-      currenciesList: this.$route.params.currencies_List
+      currenciesList: this.$store.state.currencies
     };
   },
   methods: {
