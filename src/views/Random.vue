@@ -3,11 +3,13 @@
     <!-- NavBar links back to Home -->
     <b-navbar type="dark" variant="dark" fixed="top">
       <b-nav>
-        <b-nav-item active router-link to="/">Home</b-nav-item>
+        <b-nav-item active router-link to="/">
+          <span class="text-danger">Home</span>
+        </b-nav-item>
       </b-nav>
     </b-navbar>
 
-<!-- Display the randomly chosen cryptocurrency in a card -->
+    <!-- Display the randomly chosen cryptocurrency in a card -->
     <b-card
       class="text-center"
       bg-variant="dark"
@@ -18,17 +20,17 @@
       <!-- Round price to 3 siginificant figures -->
       <b-card-text>Price is: ${{Number (parseFloat(currenciesList[selected].price_usd).toPrecision(3))}}</b-card-text>
       <!-- When the random button is clicked, the function pickRandom() is called -->
-      <b-button @click="pickRandom" variant="primary">Random</b-button>
+      <b-button @click="pickRandom" variant="danger">Random</b-button>
     </b-card>
-  
-  <Footer></Footer>
+
+    <Footer></Footer>
   </div>
 </template>
 
 <script lang="ts">
-import Vue from 'vue';
+import Vue from "vue";
 import router from "vue-router";
-import Footer from '@/components/footer.vue';
+import Footer from "@/components/footer.vue";
 
 export default Vue.extend({
   components: {
