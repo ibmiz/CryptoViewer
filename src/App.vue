@@ -1,27 +1,25 @@
 <template>
   <div id="app">
-    <router-view/>
+    <!-- Animate transitions when going to another page -->
+<transition name="router-anim" enter-active-class="animated fadeIn" leave-active-class="animated fadeOut">
+   <router-view/>
+</transition>
   </div>
 </template>
 
 <style>
+@import url("https://fonts.googleapis.com/css?family=Roboto");
+@import "https://cdn.jsdelivr.net/npm/animate.css@3.5.1";
+
 #app {
-  font-family: 'Avenir', Helvetica, Arial, sans-serif;
+  font-family: "Roboto";
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   text-align: center;
-  color: #2c3e50;
-}
-#nav {
-  padding: 30px;
 }
 
-#nav a {
-  font-weight: bold;
-  color: #2c3e50;
-}
-
-#nav a.router-link-exact-active {
-  color: #42b983;
-}
+  .page {
+    position: fixed;
+    width: inherit;
+  }
 </style>

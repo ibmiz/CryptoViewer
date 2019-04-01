@@ -4,7 +4,7 @@
     <b-navbar type="dark" variant="dark" fixed="top">
       <b-nav>
         <b-nav-item active router-link to="/">
-          <span class="text-danger">Home</span>
+          <span class="text-danger"><font-awesome-icon icon="home"/> Home</span>
         </b-nav-item>
       </b-nav>
     </b-navbar>
@@ -57,7 +57,7 @@ export default Vue.extend({
   name: "details",
   // Add footer components
   components: {
-    Footer
+    Footer,
   },
   data() {
     return {
@@ -66,9 +66,9 @@ export default Vue.extend({
       currencies: this.$store.state.currencies,
       nextCurrency: this.$store.state.currencies.slice(
         parseInt(this.$route.params.currencyRank),
-        parseInt(this.$route.params.currencyRank) + 3
+        parseInt(this.$route.params.currencyRank) + 3,
       ),
-      title: "Details"
+      title: "Details",
     };
   },
   computed: {
@@ -78,8 +78,8 @@ export default Vue.extend({
         .percent_change_1h > 0
         ? "inc"
         : "dec";
-    }
-  }
+    },
+  },
 });
 </script>
 

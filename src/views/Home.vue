@@ -3,10 +3,17 @@
   <div class="index" style="myStyle">
     <b-navbar type="dark" variant="dark" fixed="top" static>
       <b-nav class="nav-items">
-        <b-nav-item active router-link to="/"><span class="text-danger">Home</span></b-nav-item>
-        <b-nav-item active router-link to="/random"><span class="text-light">Random</span></b-nav-item>
+        <b-nav-item active router-link to="/">
+          <span class="text-danger">
+            <font-awesome-icon icon="home"/>Home
+          </span>
+        </b-nav-item>
+        <b-nav-item active router-link to="/random">
+          <span class="text-light">
+            <font-awesome-icon icon="random"/>Random
+          </span>
+        </b-nav-item>
       </b-nav>
-
       <!-- Pick Categories -->
       <div class="col-xs-3">
         <b-form-select class="selectpicker" size="sm" ref="range" v-model="range">
@@ -34,17 +41,16 @@
     <div class="row">
       <!-- For the currently selected category, put each currency into its own card with its own details -->
       <div
-      
         id="cards"
         v-for="currency in orderedItems(returnRange(currencies))"
         :key="currency.name"
         class="col-md-4"
       >
         <b-card bg-variant="dark" :title="currency.name" text-variant="white" class="text-center">
-          <font-awesome-icon icon="coins" />
+          <font-awesome-icon icon="coins"/>
           <b-card-text>Rank: {{currency.rank}}</b-card-text>
-            <!-- Button to load goTodetail function -->
-            <b-button variant="danger" @click="gotoDetail(currency.rank)">Details</b-button>
+          <!-- Button to load goTodetail function -->
+          <b-button variant="danger" @click="gotoDetail(currency.rank)">Details</b-button>
         </b-card>
       </div>
     </div>
@@ -61,7 +67,7 @@ import Footer from "@/components/footer.vue";
 
 export default Vue.extend({
   components: {
-    Footer
+    Footer,
   },
   data() {
     return {
@@ -72,8 +78,7 @@ export default Vue.extend({
     };
   },
 
-  //Retrieve a list of currencies from API provided by coinmarketcap
-
+  // Retrieve a list of currencies from API provided by coinmarketcap using Vuex
   mounted() {
     this.$store.dispatch("fetchCurrencies", { self: this });
   },
@@ -87,13 +92,14 @@ export default Vue.extend({
     orderedItems(items: any) {
       if (this.currentOrder === "rank") {
         return items.sort((a: any, b: any) =>
-          parseInt(a[this.currentOrder]) > parseInt(b[this.currentOrder]) ? 1 : -1
+          parseInt(a[this.currentOrder]) > parseInt(b[this.currentOrder])
+            ? 1
+            : -1,
         );
-      }
-      else{
-      return items.sort((a: any, b: any) =>
-        a[this.currentOrder] > b[this.currentOrder] ? 1 : -1
-      );
+      } else {
+        return items.sort((a: any, b: any) =>
+          a[this.currentOrder] > b[this.currentOrder] ? 1 : -1,
+        );
       }
     },
 
@@ -127,19 +133,17 @@ export default Vue.extend({
       this.$router.push({
         name: "details",
         params: {
-          currencyRank: rank
-        }
+          currencyRank: rank,
+        },
       });
-    }
-  }
+    },
+  },
 });
 </script>
 
 <style>
-/* Use Roboto Font */
-@import url("https://fonts.googleapis.com/css?family=Roboto");
-
 /* Stylise the cards with padding */
+
 #cards {
   margin: auto;
   padding: 40px;
@@ -149,13 +153,11 @@ export default Vue.extend({
   padding-top: 70px;
 }
 
-
 body {
   min-height: 100vh;
   position: relative;
   margin: 0;
   background: black !important;
   padding-bottom: 100px;
-  font-family: 'Roboto';
 }
 </style>

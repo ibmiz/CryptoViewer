@@ -4,7 +4,9 @@
     <b-navbar type="dark" variant="dark" fixed="top">
       <b-nav>
         <b-nav-item active router-link to="/">
-          <span class="text-danger">Home</span>
+          <span class="text-danger">
+            <font-awesome-icon icon="home"/>Home
+          </span>
         </b-nav-item>
       </b-nav>
     </b-navbar>
@@ -34,28 +36,28 @@ import Footer from "@/components/footer.vue";
 
 export default Vue.extend({
   components: {
-    Footer
+    Footer,
   },
   data() {
     return {
       // Assign currenciesList to data pushed through from router
       // randomId starts off with 1 initially to prevent an index error
       randomId: 1,
-      currenciesList: this.$store.state.currencies
+      currenciesList: this.$store.state.currencies,
     };
   },
   methods: {
     // randomly pick a number within the range of how many currencies there are to avoid an index error
     pickRandom() {
       this.randomId = Math.floor(Math.random() * this.currenciesList.length);
-    }
+    },
   },
   computed: {
     // compute randomId's value
     selected(): any {
       return this.randomId || 1;
-    }
-  }
+    },
+  },
 });
 </script>
 

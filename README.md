@@ -86,18 +86,12 @@ Will select a certain range from the whole list of currencies
 ##### Return
 Returns a sliced range of cryptocurrencies depending on the value of `Range`
 
-### `goTodetail(Id, price, percentChange, totalSupply, nextCurrency)`
+### `goTodetail(rank)`
 ##### Description
 This will load the details page using Vue Router
 ##### Parameters
 
- - `Id` is the currencies' name
- - `price` is it's price in USD
- - `percentChange` is how much the value has changed in the past hour
- - `totalSupply` is total number of coins for the currency
- - `nextCurrency` is the list of the next 3 currencies in rank
-
-
+ - `rank` is the index in the list of currency array of the coin chosen
 
 ### `pickRandom()`
 ##### Description
